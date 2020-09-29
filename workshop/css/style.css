@@ -29,6 +29,11 @@ h1, h2, h3, h4, h5,
 .border-2 {
   border-width: 2px; }
 
+  .filter {
+    -webkit-filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);
+  }
+
 .text-black {
   color: #000 !important; }
 
