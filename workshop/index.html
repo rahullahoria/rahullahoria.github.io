@@ -44,23 +44,29 @@
       <div class="site-mobile-menu-body"></div>
     </div>
     
-    <header class="site-navbar py-3" role="banner" style="position: fixed; top: 0;">
-      <div class="container-fluid">
+    <header class="site-navbar py-3" role="banner" style="text-align: right; position: fixed; top: 0;">
+      <a href="#register" type="button" class="btn btn-primary" data-aos="fade-up" data-aos-delay="400"><span>Register Now</span></a>
+
+      <!-- <ul class="site-menu js-clone-nav mx-auto ">
+        <li class="cta"><a type="button" href="#register">Register Now</a></li>
+      </ul>
+       -->
+
+      <!-- <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-11 col-xl-2">
-            <!-- <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0">Work<span class="text-primary">shop</span> </a></h1> -->
+            <h1 class="mb-0"><a href="index.html" class="text-white h2 mb-0">Work<span class="text-primary">shop</span> </a></h1> 
           </div>
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
-                <!-- <li class="active"><a href="../index.html">Home</a></li> -->
-                <!-- <li><a href="about.html">About Us</a></li>
+                <li class="active"><a href="../index.html">Home</a></li> 
+                <li><a href="about.html">About Us</a></li>
                 <li><a href="speakers.html">Speakers</a></li>
-                <li><a href="news.html">News</a></li> -->
-                <!-- <li><a href="https://pwr-igniter.thinkific.com">Courses</a></li> http://bit.ly/30plkVb -->
-                <!-- <li class="cta"><a type="button"  href="http://bit.ly/30plkVb" target="_blank">Register Now</a></li> -->
-                <!-- <li class="cta"><a type="button"  data-toggle="modal" data-target="#regModal">Register Now</a></li> -->
-                <li class="cta"><a type="button" href="#register">Register Now</a></li>
+                <li><a href="news.html">News</a></li> 
+                <li><a href="https://pwr-igniter.thinkific.com">Courses</a></li> http://bit.ly/30plkVb 
+                <li class="cta"><a type="button"  href="http://bit.ly/30plkVb" target="_blank">Register Now</a></li> 
+                <li class="cta"><a type="button"  data-toggle="modal" data-target="#regModal">Register Now</a></li> 
 
 
               </ul>
@@ -68,8 +74,8 @@
           </div>
           <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
           </div>
-        </div>
-      </div>
+        </div> -->
+     
     </header>
 
     <div class="site-section site-hero">
@@ -608,7 +614,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6" data-aos="fade-up">
-        <form  onsubmit="return regUser()">
+        <!-- <form  onsubmit="return regUser()"> -->
           <div class="row form-group">
                   
             <div class="col-md-12">
@@ -633,10 +639,10 @@
 
           <div class="row form-group">
             <div class="col-md-12">
-              <input type="submit" value="Register" class="btn btn-primary py-2 px-4 text-white">
+              <button type="submit" value="Register" class="btn btn-primary py-2 px-4 text-white" onclick="regUser()">Register</button>
             </div>
           </div>
-        </form>
+        <!-- </form> -->
       </div>
       <div class="col-md-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
         <div class="p-4 mb-3">

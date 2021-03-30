@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users
+  namespace: pwr
+  labels:
+    app: users
+spec:
+  selector:
+    matchLabels:
+      app: users
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+      - name: users
+        image: mogiio/pwr-users:v.04
+        env:
+        - name: MONGO_DB_URL
+          value: "mongodb://172.16.122.203/users-prod"
+        - name: MONGODB_ATLAS_URL
+          value: "mongodb+srv://pwr:1QNJgHwqYH36CDs4@cluster0.0uihy.mongodb.net/todolist-mean?retryWrites=true&w=majority"
+        # - name: JWT_BASE_URL
+        #   value: "https://qa.pwrigniter.com/jwt/"
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 500m
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: users-svc
+  namespace: pwr
+spec:
+  selector:
+    app: users
+  ports:
+    - port: 3000
+  #    nodePort: 30080
+  type: ClusterIP
+  #type : NodePort
+
+---
+
+#https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengsettingupingresscontroller.htm
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: users-ingress
+  namespace: pwr
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - apis.pwrigniter.com
+    secretName: pwr-igniter-apis-tls
+  rules:
+  - host: apis.pwrigniter.com
+    http:
+      paths:
+      # serve images from demo.images.io/images/
+      #- path: /images(/|$)(.*)
+      - path: /users
+        pathType: Prefix
+        backend:
+          serviceName: users-svc
+          servicePort: 3000
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata: 
+  name: users-hpa
+  namespace: pwr
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: users
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
