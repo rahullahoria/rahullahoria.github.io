@@ -17,6 +17,19 @@
     <link rel="stylesheet" href="css/aos.css">
 
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-193179702-1">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-193179702-1');
+</script>
+
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=605d48364d1bac0012adf267&product=sticky-share-buttons" async="async"></script>
   </head>
   <body>
   
@@ -45,7 +58,11 @@
                 <li><a href="speakers.html">Speakers</a></li>
                 <li><a href="news.html">News</a></li> -->
                 <!-- <li><a href="https://pwr-igniter.thinkific.com">Courses</a></li> http://bit.ly/30plkVb -->
-                <li class="cta"><a type="button"  href="http://bit.ly/30plkVb" target="_blank">Register Now</a></li>
+                <!-- <li class="cta"><a type="button"  href="http://bit.ly/30plkVb" target="_blank">Register Now</a></li> -->
+                <!-- <li class="cta"><a type="button"  data-toggle="modal" data-target="#regModal">Register Now</a></li> -->
+                <li class="cta"><a type="button" href="#register">Register Now</a></li>
+
+
               </ul>
             </nav>
           </div>
@@ -67,7 +84,7 @@
             <!-- <iframe width="80%" height="500vh" src="https://www.youtube.com/embed/Pkz63EXwXeU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
             
             <span class="d-block mb-5 caption" data-aos="fade-up" data-aos-delay="300">WORKSHOP ON COMING, SUNDAY AT 11 AM</span>
-            <a href="http://bit.ly/30plkVb" target="_blank" type="button" class="btn btn-custom" data-aos="fade-up" data-aos-delay="400"><span>Register Now</span></a>
+            <a href="#register" type="button" class="btn btn-custom" data-aos="fade-up" data-aos-delay="400"><span>Register Now</span></a>
           </div>
         </div>
       </div>
@@ -573,22 +590,85 @@
 <br>
 <br>
 <br>
-<div style="text-align: center;"><a  data-aos="fade-up" data-aos-delay="400" type="button" class="btn btn-custom" href="http://bit.ly/30plkVb" target="_blank"><span>Register Now</span></a>
+<div style="text-align: center;"><a  data-aos="fade-up" data-aos-delay="400" type="button" class="btn btn-custom" href="#register"><span>Register Now</span></a>
 </div>
 
+<div class="site-section site-hero inner">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-10">
+        <span class="d-block mb-3 caption" data-aos="fade-up">Don't Miss The Chance</span>
+        <h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="100">Register Now</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<section id="register">
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6" data-aos="fade-up">
+        <form  onsubmit="return regUser()">
+          <div class="row form-group">
+                  
+            <div class="col-md-12">
+              <label class="" for="name">Name</label> 
+              <input type="name" id="name" class="form-control" placeholder="Rahul Lahoria">
+            </div>
+          </div>
+          <div class="row form-group">
+                  
+            <div class="col-md-12">
+              <label class="" for="email">Email</label> 
+              <input type="email" id="email" class="form-control" placeholder="arean.oclo@gmail.com">
+            </div>
+          </div>
+          <div class="row form-group">
+                  
+            <div class="col-md-12">
+              <label class="" for="mobile">Mobile</label> 
+              <input type="number" minlength="10" id="mobile" class="form-control" placeholder="959955321345">
+            </div>
+          </div>
 
+          <div class="row form-group">
+            <div class="col-md-12">
+              <input type="submit" value="Register" class="btn btn-primary py-2 px-4 text-white">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
+        <div class="p-4 mb-3">
+          <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Address</p>
+          <p class="mb-4">171, Sector 7, Dwarka, Delhi</p>
+
+          <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Phone</p>
+          <p class="mb-4"><a href="#">+91 888 2307 448</a></p>
+
+          <p class="mb-0 font-weight-bold text-secondary text-uppercase mb-3">Email Address</p>
+          <p class="mb-0"><a href="#">arean.oclo@gmail.com</a></p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 <!-- Modal -->
 <div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="regModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="regModalLabel">Get Software Developer Job,  <span class="text-primary">Cracking Coding Interview</span> Workshop</h5>
+        <h5 class="modal-title" id="regModalLabel"><span class="text-primary">Cracking Coding Interview</span> Workshop</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSecQl4p0DaofM18VRtrrsqJTVw-zfKnCelfFeXGdn9LuEqkgg/viewform?embedded=true" width="100%" height="705" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        
+        <span id="regMessage" class="text-primary"></span>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -732,6 +812,51 @@
   <script src="js/aos.js"></script>
 
   <script src="js/main.js"></script>
+
+  <script>
+    async function regUser(){
+      console.log(window.location.href)
+      var url = new URL(window.location.href);
+      var referral_code = url.searchParams.get("ref");
+      console.log(referral_code);
+      let name = document.getElementById('name').value;
+      let email = document.getElementById('email').value;
+      let mobile = document.getElementById('mobile').value;
+
+      if(!name || !email || !mobile) return false;
+
+      try{
+
+        const rawResponse = await fetch('https://apis.pwrigniter.com/users', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name:name, email: email, mobile: mobile, referral_code: referral_code})
+      });
+      const content = await rawResponse.json();
+
+      console.log(content);
+
+      document.getElementById('name').value = "";
+      document.getElementById('email').value = "";
+      document.getElementById('mobile').value = "";
+      $('#regModal').modal({
+        keyboard: false
+      });
+
+      document.getElementById("regMessage").innerHTML = "All the sets, for coming Sunday are full. Please make sure your contacts details are correct. So, we can email you for next workshop. <br> <br> <br> Thnx ";
+     
+        setTimeout(()=>{ window.location = "https://pwrigniter.com/#register-success";},8000)
+       
+      }
+      catch(e){
+           console.log("error",e)
+      }
+     return false;
+    }
+  </script>
     
   </body>
 </html>
