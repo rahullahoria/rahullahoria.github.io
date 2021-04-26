@@ -1,0 +1,239 @@
+00:00 hello
+    people say hello 27 people in 2 mins
+before we start lets setup some rules for our interactive webinar
+
+if you can put your phone on silent, I am going to share my 20 year+ experince of interview
+Attend till the end, if you want to take maximum our of this webinar, 60 mins is not long time
+
+how many people are thinking, how its interactive webinar...
+
+if you are thinking so, type Y in chat
+
+    14 people type y
+
+1. You can ask question to me in chat, in the end i will pickup some questions to answer, 
+    even if, i miss your question, team will send you the answer over whatsapp
+
+2. I will be asking question in between, that you can answer and i wil share the results with you.
+
+00:05 (pool) let start with first question
+ Are you from CSE or No CSE?
+
+what i this about CSE or No CSE?
+
+My introduction, and why i am right person for this...
+
+Webinar outline...
+
+00:07 (pool) Are you working in some company?
+
+(pool) Are you working as SDE?
+
+(pool)if you this know this will help you to crack the interview?
+
+talk about the results
+
+00:10 start will first phase story
+
+00:15 (chat) Do want to do something for your family? type y
+
+00:16 (pool) If you have give a interview previously, do you agree with me?
+
+00:17 Introduce the 2nd phase
+
+00:18 Tell story
+
+in publish phase found 2 thinks, resume building and 
+reaching to key people inside the company
+
+Question is, how to create a good resume?
+How to reach people inside the company?
+
+00:23 (chat) Do you agree with me, Resume can make difference? type y
+
+00:25 (pool) Who agree with me nakri portal, don't give good results?
+
+00:26 Talk about resume building
+
+00:30 Talk about reaching to right people
+
+00:33 (pool) If you feel you need improvement in these creating the resume and reaching to right people inside the company
+    type y in chat
+
+00:34 introduce 3rd phase
+
+00:35 Good impression in interview matters?
+
+00:36 My experence 
+
+00:41 I am going to tell you things, which happened differently?
+
+00:42 start explaining 1 by 1
+
+00:46 (pool) do you think webinar way helpful?
+
+00:50 My mission, If you want my futher guidance.. I have following for you... For next 15 mins in keep the price @4999
+
+00:55 QnA
+
+{
+    videoUrl : "https://cdn2.mogiio.com/5f34e91cc562fc7ecac99626/1618500142293_/playlist.m3u8",
+    seedMes: [
+        {
+            at: 1000,
+            text: "hello sir",
+            from: "Tanuj",
+          },
+          {
+            at: 2000,
+            text: "hello",
+            from: "Mohit",
+          },
+          {
+            at: 3000,
+            text: "hello sirr",
+            from: "Sandeep",
+          },{
+            at: 4000,
+            text: "I am here",
+            from: "Arun",
+          },
+          {
+            at: 5000,
+            text: "hello...",
+            from: "Vijay",
+          },
+          {
+            at: 6000,
+            text: "hello sir",
+            from: "Varun",
+          },{
+            at: 7000,
+            text: "hello sir",
+            from: "Tanuj",
+          },
+          {
+            at: 8000,
+            text: "hello",
+            from: "Veer",
+          },
+          {
+            at: 9000,
+            text: "hello sirr",
+            from: "Rai",
+          },{
+            at: 10000,
+            text: "hello g",
+            from: "Sahu",
+          },
+          {
+            at: 11000,
+            text: "hello",
+            from: "Surender",
+          },
+          {
+            at: 12000,
+            text: "hello sirr",
+            from: "Sandeep",
+          },{
+            at: 13000,
+            text: "hello sir",
+            from: "Tanuj",
+          },
+          {
+            at: 14000,
+            text: "hello",
+            from: "Mohini",
+          },
+          {
+            at: 15000,
+            text: "hello...",
+            from: "Sandeep",
+          },{
+            at: 16000,
+            text: "hi sir",
+            from: "Sandy",
+          },
+          {
+            at: 17000,
+            text: "hello",
+            from: "Sonia",
+          },
+          {
+            at: 18000,
+            text: "hello sirr",
+            from: "Rohan",
+          },{
+            at: 19000,
+            text: "hello sir",
+            from: "Jatin",
+          },
+          {
+            at: 20000,
+            text: "hello",
+            from: "Devid",
+          },
+          {
+            at: 21000,
+            text: "hello sirr",
+            from: "Ali",
+          },
+        {
+          type: "pool",
+          at: 3000,
+          question: "Are you a CSE or Non CSE student?",
+          options:['CS','Non CSE', 'Other'],
+        },
+        {
+          type: "result",
+          at: 6000,
+          title: "Are you a CSE or Non CSE student?",
+          dataLabel: "Results",
+          labels: ['CS','Non CSE', 'Other'],
+          data:[70,29,1],
+        },
+        {
+          type: "pool",
+          at: 7000,
+          question: "Are you looking for a job?",
+          options:['yes','no','may be'],
+        },
+        {
+          type: "result",
+          at: 10000,
+          title: "Are you looking for a job?",
+          dataLabel: "Results",
+          labels: ['yes','no','may be'],
+          data:[80,15,5],
+        },
+    
+      ]
+
+    
+  }
+
+
+  webinar
+
+  {
+    startTime : new Date("2021-04-24T21:27:12.515Z"),
+    duration : 60,
+    title: "Cracking the Coding Interview",
+    des:
+      "Are you looking for a software development engineer job in a MNC or in a Startup, which pays you 6 lakh or more per year. Then join my free workshop on, How you can crack a coding interview. Which is happening live on coming Sunday at 11:00 a.m. Do your registration now by clicking on the link provided inside the description. Hello friends, I am Rahul Lahoria. I am a geek, I started coding at age of 13. Founded my first company at age of 17. Did my Mtech in computer science from IIT Kharagpur. started working with the MNC known as capillary technology. After that I found IT company known as sadkon labs. I sold that company to live media. Work with livecheck as a CTO. Now co-founding a video tech startup known as Moge I/O",
+    speaker: "Rahul Lahoria",
+    flowId : ObjectId("608430ffe1875ce4ff79037a")
+    
+  }
+
+  UserWebinar
+{
+    userId : ObjectId("605c03c50dc078f35b314cd8"),
+    webinarId: ObjectId("60843203e1875ce4ff79037b")
+
+}
+
+db.flows.findOneAndUpdate({"_id" : ObjectId("608430ffe1875ce4ff79037a")},
+
+{$set:{ videoUrl : "https://cdn2.mogiio.com/5f34e91cc562fc7ecac99626/1618500142293_/playlist.m3u8", seedMes: [ { at: 1000, text: "hello sir", from: "Tanuj", }, { at: 2000, text: "hello", from: "Mohit", }, { at: 3000, text: "hello sirr", from: "Sandeep", },{ at: 4000, text: "I am here", from: "Arun", }, { at: 5000, text: "hello...", from: "Vijay", }, { at: 6000, text: "hello sir", from: "Varun", },{ at: 7000, text: "hello sir", from: "Tanuj", }, { at: 8000, text: "hello", from: "Veer", }, { at: 9000, text: "hello sirr", from: "Rai", },{ at: 10000, text: "hello g", from: "Sahu", }, { at: 11000, text: "hello", from: "Surender", }, { at: 12000, text: "hello sirr", from: "Sandeep", },{ at: 13000, text: "hello sir", from: "Tanuj", }, { at: 14000, text: "hello", from: "Mohini", }, { at: 15000, text: "hello...", from: "Sandeep", },{ at: 16000, text: "hi sir", from: "Sandy", }, { at: 17000, text: "hello", from: "Sonia", }, { at: 18000, text: "hello sirr", from: "Rohan", },{ at: 19000, text: "hello sir", from: "Jatin", }, { at: 20000, text: "hello", from: "Devid", }, { at: 21000, text: "hello sirr", from: "Ali", }, { type: "pool", at: 3000, question: "Are you a CSE or Non CSE student?", options:['CS','Non CSE', 'Other'], }, { type: "result", at: 6000, title: "Are you a CSE or Non CSE student?", dataLabel: "Results", labels: ['CS','Non CSE', 'Other'], data:[70,29,1], }, { type: "pool", at: 30000, question: "Are you looking for a job?", options:['yes','no','may be'], }, { type: "result", at: 40000, title: "Are you looking for a job?", dataLabel: "Results", labels: ['yes','no','may be'], data:[80,15,5] } ] }}
+)

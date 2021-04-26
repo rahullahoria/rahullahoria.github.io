@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <title>Chat | ChatApp</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+  </head>
+  <body>
+ 
+    <div id="timer" class="backgr">
+      <div class="timer_str">
+        Webinar will start in<br />
+        <span class="timer" id="time">05:00</span>
+      </div>
+    </div>
+
+    <div id="webinar" class="chat">
+      <div class="chat__sidebar">
+        <video
+          width="100%"
+          style="margin-top: 20px"
+          id="video"
+          controls
+        ></video>
+
+        <div class="container">
+          <div class="header" id="about_webinar_container">
+            <span>About Webinar</span>
+          </div>
+          <div class="content">
+            <div id="about_webinar" style="margin: 20px"></div>
+          </div>
+        </div>
+      </div>
+  
+      <div id="mydiv" >
+        <div id="mydivheader">Click here to move</div>
+        <ol id="messages" class="chat__messages"></ol>
+
+        <div id="pool-results" style="margin-left: 10px">
+        </div>
+
+        <div id="pool" style="margin-left: 10px"></div>
+
+        <div class="chat__footer">
+          <form id="message-form">
+            <input
+              type="text"
+              name="message"
+              placeholder="Message"
+              autofocus
+              autocomplete="off"
+            />
+            <button>Send</button>
+          </form>
+          <!-- <button id="send-location">Send location</button> -->
+        </div>
+      </div>
+    </div>
+
+    <script id="pool-results-template" type="text/template">
+
+      <canvas id="bar-chart" width="800" height="450"></canvas>
+    
+    </script>
+
+
+    <script id="pool-template" type="text/template">
+      <hr />
+            <br />
+            <h3>{{ question }}</h3>
+            <br />
+            <button onclick="sendPool('{{ op1 }}');">{{ op1 }}</button><br /><br />
+            <button onclick="sendPool('{{ op2 }}');">{{ op2 }}</button><br /><br />
+            <button onclick="sendPool('{{ op3 }}');">{{ op3 }}</button><br /><br />
+            <hr />
+    </script>
+
+    <script id="message-template" type="text/template">
+      <li class="message">
+          <div class="message__title">
+              <h4>{{ from }}</h4>
+              <span>{{ createAt }}</span>
+          </div>
+          <div class="message__body">
+              <p>{{ text }}</p>
+          </div>
+      </li>
+    </script>
+
+    <script id="about-webinar-template" type="text/template">
+      <div style="width:65%; float: left;">
+        <h3 >
+          {{ title }}
+        </h3>
+      </div>
+      <div style="width:35%;  float: right;font-style: italic;">
+        <h3 style="text-align:right;">
+           by {{ speaker }}
+        </h3>
+      </div>
+
+      <p style="color: white;">
+
+        {{ des }}
+
+      </p>
+    </script>
+
+    <script id="location-message-template" type="text/template">
+      <li class="message">
+          <div class="message__title">
+              <h4>{{ from }}</h4>
+              <span>{{ createAt }}</span>
+          </div>
+          <div class="message__body">
+              <a href="{{ url }}" target="_blank">My current location</a>
+          </div>
+      </li>
+    </script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/libs/jquery-3.2.1.min.js"></script>
+    <script src="/js/libs/moment.js"></script>
+    <script src="/js/libs/mustache.js"></script>
+    <script src="/js/libs/deparam.js"></script>
+    <script src="/js/chat.js"></script>
+  </body>
+</html>
