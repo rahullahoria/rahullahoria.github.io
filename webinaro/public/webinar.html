@@ -10,6 +10,7 @@
     <title>Chat | ChatApp</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
   </head>
   <body>
  
@@ -20,33 +21,66 @@
       </div>
     </div>
 
-    <div id="webinar" class="chat">
-      <div class="chat__sidebar">
-        <video
-          width="100%"
-          style="margin-top: 20px"
-          id="video"
-          controls
-        ></video>
+    <div id="webinar-over" class="backgr">
+      <div class="timer_str">
+        Webinar is Over<br />
+        <span class="timer" id="time">Register for Next Webinar</span>
 
-        <div class="container">
-          <div class="header" id="about_webinar_container">
-            <span>About Webinar</span>
-          </div>
-          <div class="content">
-            <div id="about_webinar" style="margin: 20px"></div>
-          </div>
+        <div id="upcoming-webinars">
+          
         </div>
+        
       </div>
-  
-      <div id="mydiv" >
-        <div id="mydivheader">Click here to move</div>
-        <ol id="messages" class="chat__messages"></ol>
+    </div>
 
+    <div id="webinar" class="webinar_box">
+      <video
+        width="100%"
+       
+        id="video"
+        controls
+      ></video>
+
+      <div id="action-box" class="fixed_div">
+        
+        <a class="btn notification" href="#" onclick="showChatBox()">
+          <span class="iconify icon_btn" data-icon="carbon:chat-bot" data-inline="false">
+            
+          </span>
+          <span class="icon_text">
+            chat
+          </span>
+          <span id="message-count" class="badge">3</span>
+        </a>
+<!-- 
+        <a class="btn" href="#">
+          <span class="iconify icon_btn" data-icon="cib:about-me" data-inline="false"></span>          <span class="icon_text">
+            about
+          </span>
+        </a> -->
+      </div>
+
+      <!-- <div class="container">
+        <div class="header" id="about_webinar_container">
+          <span>About Webinar</span>
+        </div>
+        <div class="content">
+          <div id="about_webinar" style="margin: 20px"></div>
+        </div>
+      </div> -->
+
+      <div id="pool-box-center" class="pool_box">
         <div id="pool-results" style="margin-left: 10px">
         </div>
 
         <div id="pool" style="margin-left: 10px"></div>
+      </div>
+
+      <div id="chat-box" class="chat_box">
+        <div >Click here to minimize</div>
+        <ol id="messages" class="chat__messages"></ol>
+
+        
 
         <div class="chat__footer">
           <form id="message-form">
@@ -59,27 +93,39 @@
             />
             <button>Send</button>
           </form>
+          <button onclick="hideChatBox()">Close</button>
+
           <!-- <button id="send-location">Send location</button> -->
         </div>
       </div>
+
     </div>
 
+    <script id="upcoming-webinar-template" type="text/template">
+      <div style="margin: 10px">
+        {{startTime}} <button onclick="regForNextWebinar('{{wId}}')" >Book Now</button>
+      </div>
+  </script>
     <script id="pool-results-template" type="text/template">
 
-      <canvas id="bar-chart" width="800" height="450"></canvas>
+      <canvas id="bar-chart" style="color: white" width="800" height="450"></canvas>
     
     </script>
 
 
     <script id="pool-template" type="text/template">
-      <hr />
+    
+      <div style="text-align: left">
             <br />
             <h3>{{ question }}</h3>
             <br />
-            <button onclick="sendPool('{{ op1 }}');">{{ op1 }}</button><br /><br />
-            <button onclick="sendPool('{{ op2 }}');">{{ op2 }}</button><br /><br />
-            <button onclick="sendPool('{{ op3 }}');">{{ op3 }}</button><br /><br />
-            <hr />
+            
+              <button onclick="sendPool('{{ op1 }}');">{{ op1 }}</button><br /><br />
+              <button onclick="sendPool('{{ op2 }}');">{{ op2 }}</button><br /><br />
+              <button onclick="sendPool('{{ op3 }}');">{{ op3 }}</button><br /><br />
+            </div>
+            
+           
     </script>
 
     <script id="message-template" type="text/template">

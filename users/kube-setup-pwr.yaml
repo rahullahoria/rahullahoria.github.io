@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: users
-        image: mogiio/pwr-users:v.04
+        image: mogiio/pwr-users:v1.02
         env:
         - name: MONGO_DB_URL
           value: "mongodb://172.16.122.203/users-prod"
@@ -71,7 +71,7 @@ spec:
       paths:
       # serve images from demo.images.io/images/
       #- path: /images(/|$)(.*)
-      - path: /users
+      - path: /
         pathType: Prefix
         backend:
           serviceName: users-svc

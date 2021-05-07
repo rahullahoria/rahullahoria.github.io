@@ -53,6 +53,10 @@ socket.on("updateUserList", function (users) {
 socket.on("newMessage", appendMessage);
 
 function appendMessage(message) {
+  if (!chatBoxStatus) {
+    messageCount++;
+    $("#message-count").text(messageCount);
+  }
   var formattedTime = moment(message.createAt).format("h:mm:ss a");
   var template = jQuery("#message-template").html();
   var html = Mustache.render(template, {
@@ -65,34 +69,82 @@ function appendMessage(message) {
   scrollToBottom();
 }
 
+jQuery("#chat-box").hide();
+var chatBoxStatus = false;
+var messageCount = 0;
+
+function hideChatBox() {
+  jQuery("#action-box").show();
+
+  chatBoxStatus = false;
+  jQuery("#chat-box").hide();
+}
+function showChatBox() {
+  jQuery("#action-box").hide();
+  messageCount = 0;
+  chatBoxStatus = true;
+  jQuery("#chat-box").show();
+}
+
 socket.on("webinarInfo", setupWebinar);
-
+jQuery("#webinar-over").hide();
 function setupWebinar(message) {
-    console.log("webinfo",message);
-    webInfo = message;
+  console.log("webinfo", message);
+  webInfo = message;
 
-    document.getElementById("webinar").style.display = "none";
-    let webinarTime = new Date(webInfo.webinarObj.startTime);
-    let timeRemaining = webinarTime - new Date();
-  
+  document.getElementById("webinar").style.display = "none";
+  let webinarTime = new Date(webInfo.webinarObj.startTime);
+  let timeRemaining = webinarTime - new Date();
+
+  console.log(timeRemaining,"timeRemaining")
+  var endTime = new Date(webinarTime.getTime() + webInfo.webinarObj.duration*60000);
+
+  if(endTime < new Date() ){
+    console.log("webinar is over");
+    jQuery("#timer").hide();
+    jQuery("#webinar-over").show();
+    renderUpcomingWebinars(webInfo.upcomingWebinars)
+  }
+  else{
     if (timeRemaining > 0) {
       startTimer(webinarTime.getTime(), "time");
     } else {
       startWebinar();
     }
+  }
 
+ 
 }
 
-function renderAboutWebinar(){
+function renderUpcomingWebinars(upcomingWebinars){
+  jQuery("#upcoming-webinars").innerHTML = "";
+  const seoul = new Date();
+
+  var template = jQuery("#upcoming-webinar-template").html();
+  for(let i=0;i<upcomingWebinars.length;i++){
+    
+    var now = new Date(upcomingWebinars[i].startTime);
+
+    now = now.getTime() - seoul.getTimezoneOffset() * 60000;
+    now = new Date(now);
+    
+    var html = Mustache.render(template, {
+      wId: upcomingWebinars[i]._id,
+      startTime: now.toLocaleTimeString()+ " , "+ now.toDateString()
+    });
+    jQuery("#upcoming-webinars").append(html);
+  }
+ 
+}
+
+function renderAboutWebinar() {
   var template = jQuery("#about-webinar-template").html();
-  var html = Mustache.render(template,{
-      title: webInfo.webinarObj.title,
-      des: webInfo.webinarObj.des,
-      speaker: webInfo.webinarObj.speaker
-  })
+  var html = Mustache.render(template, {
+    title: webInfo.webinarObj.title,
+    des: webInfo.webinarObj.des,
+    speaker: webInfo.webinarObj.speaker,
+  });
   jQuery("#about_webinar").append(html);
-
-
 }
 
 // event listener: newLocationMessage
@@ -126,23 +178,38 @@ jQuery("#message-form").on("submit", function (e) {
   );
 });
 
-function sendPool(ops){
-    console.log(ops);
-    jQuery("#pool").empty();
-    socket.emit(
-        "createMessage",
-        {
-          pool:true,
-          question: poolG.question,
-          response: ops
-        },
-        function () {
-            //on success
-         // messageTextbox.val("");
-        }
-      );
+function sendPool(ops) {
+  console.log(ops);
+  jQuery("#pool").empty();
+  socket.emit(
+    "createMessage",
+    {
+      pool: true,
+      question: poolG.question,
+      response: ops,
+    },
+    function () {
+      //on success
+      // messageTextbox.val("");
+    }
+  );
 }
 
+function regForNextWebinar(wId){
+  console.log(wId);
+  jQuery("#pool").empty();
+  socket.emit(
+    "createMessage",
+    {
+      reg: true,
+      webinarId: wId
+    },
+    function () {
+      //on success
+      // messageTextbox.val("");
+    }
+  );
+}
 var locationButton = jQuery("#send-location");
 locationButton.on("click", function () {
   // check user is able to access geolocation api
@@ -174,8 +241,7 @@ function startTimer(countDownDate, timerId) {
     const seoul = new Date();
     var now = new Date().getTime();
 
-    now = now - seoul.getTimezoneOffset()*60000;
-
+    now = now - seoul.getTimezoneOffset() * 60000;
 
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
@@ -214,11 +280,14 @@ function startTimer(countDownDate, timerId) {
   }, 1000);
 }
 
-window.onload = function () {
-
-};
+window.onload = function () {};
 
 function startWebinar() {
+  showChatBox();
+  setTimeout(() => {
+    hideChatBox();
+  }, 10000);
+
   document.getElementById("timer").style.display = "none";
   document.getElementById("webinar").style.display = "";
   processWebinar();
@@ -239,13 +308,24 @@ function playVideo(videoUrl) {
 
   if (Hls.isSupported()) {
     var hls = new Hls({
-      debug: true,
+      debug: false,
     });
     hls.loadSource(videoUrl);
     hls.attachMedia(video);
     hls.on(Hls.Events.MEDIA_ATTACHED, function () {
       video.muted = true;
+      
       video.play();
+     // video.muted = false;
+
+      let webinarTime = new Date(webInfo.webinarObj.startTime);
+      let timeRemaining = webinarTime - new Date();
+
+      if(timeRemaining < 0){
+        console.log("seeking to", (timeRemaining*-1)/1000);
+        video.currentTime = (timeRemaining*-1)/1000;
+      }
+      
     });
   }
   // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
@@ -267,22 +347,16 @@ function playVideo(videoUrl) {
   }
 }
 
-
-
-
-
 var seedMes = null;
 var webInfo = null;
 
 function processWebinar() {
-  
   playVideo(webInfo.flowObj.videoUrl);
 
   seedMes = [...webInfo.flowObj.seedMes];
 
   //webInfo = resp;
   renderAboutWebinar();
-
 }
 
 function onLoadedMetadata() {
@@ -291,85 +365,111 @@ function onLoadedMetadata() {
   messageLoop();
 }
 var poolG = null;
-function loadPool(poolObj){
-    jQuery("#pool-results").empty();
-    jQuery("#pool").empty();
 
+jQuery("#pool-box-center").hide();
 
-    var template = jQuery("#pool-template").html();
-    var html = Mustache.render(template,{
-        question: poolObj.question,
-        op1: poolObj.options[0],
-        op2: poolObj.options[1],
-        op3: poolObj.options[2],
-    })
-    jQuery("#pool").append(html);
-    poolG = poolObj;
+function loadPool(poolObj) {
+  setupCenterBox();
+
+  var template = jQuery("#pool-template").html();
+  var html = Mustache.render(template, {
+    question: poolObj.question,
+    op1: poolObj.options[0],
+    op2: poolObj.options[1],
+    op3: poolObj.options[2],
+  });
+  jQuery("#pool").append(html);
+  poolG = poolObj;
+  poolSetTimeout = setTimeout(() => {
+    jQuery("#pool-box-center").hide();
+  }, 10000);
 }
 
-function loadResult(resultObj){
-    jQuery("#pool").empty();
-    jQuery("#pool-results").empty();
+function setupCenterBox() {
+  if (poolSetTimeout) clearTimeout(poolSetTimeout);
 
-    var template = jQuery("#pool-results-template").html();
-    var html = Mustache.render(template,{})
-    jQuery("#pool-results").append(html);
+  jQuery("#pool-box-center").show();
 
-    new Chart(document.getElementById("bar-chart"), {
-        type: "bar",
-        data: {
-          labels: resultObj.labels,
-          datasets: [
-            {
-              label: resultObj.dataLabel,
-              backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
-              data: resultObj.data,
-            },
-          ],
+  jQuery("#pool").empty();
+  jQuery("#pool-results").empty();
+}
+
+var poolSetTimeout = null;
+function loadResult(resultObj) {
+  setupCenterBox();
+
+  var template = jQuery("#pool-results-template").html();
+  var html = Mustache.render(template, {});
+  jQuery("#pool-results").append(html);
+
+  new Chart(document.getElementById("bar-chart"), {
+    type: "bar",
+    data: {
+      labels: resultObj.labels,
+      datasets: [
+        {
+          label: resultObj.dataLabel,
+          backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+          data: resultObj.data,
         },
-        options: {
-          legend: { display: false },
-          title: {
-            display: true,
-            text: resultObj.title,
-          },
-        },
-      });
-
+      ],
+    },
+    options: {
+      legend: { display: false, labels: {
+        fontColor: 'orange'
+       } },
+      title: {
+        display: true,
+        fontColor: 'white',
+        text: resultObj.title,
+      },
+      
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero:true,
+                  fontColor: 'white'
+              },
+          }],
+        xAxes: [{
+              ticks: {
+                  fontColor: 'white'
+              },
+          }]
+      } 
+    },
+  });
+  poolSetTimeout = setTimeout(() => {
+    jQuery("#pool-box-center").hide();
+  }, 10000);
 }
 
 function messageLoop() {
   if (seedMes.length <= 0) return;
 
   //console.log("video duration", video.duration,video.currentTime);
-  let dif = video.currentTime*1000 - seedMes[0].at;
+  let dif = video.currentTime * 1000 - seedMes[0].at;
   //console.log("dif",dif);
   if (dif >= 0 && dif < 5000) {
     //console.log("dif  showing",dif);
-    if(seedMes[0].type == 'pool'){
-        loadPool(seedMes[0]);
-    }
-    else if(seedMes[0].type == 'result'){
-        loadResult(seedMes[0])
-    }
-    else {
-        let messageTime = new Date(webInfo.startAt);
-        //console.log("messageTime",messageTime, messageTime.toDateString());
-        messageTime = new Date(messageTime.getTime() + seedMes[0].at);
-        //console.log("messageTime",messageTime);
+    if (seedMes[0].type == "pool") {
+      loadPool(seedMes[0]);
+    } else if (seedMes[0].type == "result") {
+      loadResult(seedMes[0]);
+    } else {
+      let messageTime = new Date(webInfo.startAt);
+      //console.log("messageTime",messageTime, messageTime.toDateString());
+      messageTime = new Date(messageTime.getTime() + seedMes[0].at);
+      //console.log("messageTime",messageTime);
 
-        appendMessage({
-            createAt: messageTime.toString(),
-            text: seedMes[0].text,
-            from: seedMes[0].from,
-        });
-
+      appendMessage({
+        createAt: messageTime.toString(),
+        text: seedMes[0].text,
+        from: seedMes[0].from,
+      });
     }
     seedMes.shift();
-
-    
-  }
-  else if (dif > 0) {
+  } else if (dif > 0) {
     //console.log("dif not showing",dif);
 
     seedMes.shift();
@@ -381,27 +481,28 @@ function messageLoop() {
 }
 
 $("#about_webinar_container").click(function () {
-
-    $header = $(this);
-    //getting the next element
-    $content = $header.next();
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-    $content.slideToggle(500, function () {
-        //execute this after slideToggle is done
-        //change text of header based on visibility of content div
-        $header.text(function () {
-            //change text based on condition
-            return $content.is(":visible") ? "Collapse" : "About Webinar";
-        });
+  $header = $(this);
+  //getting the next element
+  $content = $header.next();
+  //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+  $content.slideToggle(500, function () {
+    //execute this after slideToggle is done
+    //change text of header based on visibility of content div
+    $header.text(function () {
+      //change text based on condition
+      return $content.is(":visible") ? "Collapse" : "About Webinar";
     });
-
+  });
 });
 
 // Make the DIV element draggable:
 dragElement(document.getElementById("mydiv"));
 
 function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  var pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
   if (document.getElementById(elmnt.id + "header")) {
     // if present, the header is where you move the DIV from:
     document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
@@ -430,8 +531,8 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
   }
 
   function closeDragElement() {
