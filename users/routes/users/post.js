@@ -2,6 +2,7 @@ const User = require("../../models/User");
 const UserWebinar = require("../../models/UserWebinar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const sendMail = require("../../lib/sendEmail")
 
 var mongoose = require("mongoose");
 let ObjectId = mongoose.Types.ObjectId;
@@ -86,6 +87,27 @@ module.exports = {
           userId: user._id,
           webinarId: ObjectId(req.body.webinarId)
         });
+        let body = `
+        Welcome ${req.body.name},<br>
+        <br>
+        Webinar will start at ${req.body.webinarStartTime}<br>
+        <br>
+
+        Inside the webinar, you will learn how to Crack the Coding Interview <br>
+        <br>
+
+        Join the webinar by link give bellow <br>
+        <br>
+        https://webinar.pwrigniter.com/?w=${req.body.webinarId}&u=${user._id}
+        <br>
+        <br>
+        I am looking forward help you to become Software Engineer. <br>
+        <br>
+        Cheers<br>
+        <br>
+        Rahul Lahoria
+        `;
+        await sendMail(req.body.email,"Webinar Details: Cracking The Coding Interview",body);
       }
 
       console.log(user);

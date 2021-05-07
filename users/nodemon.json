@@ -1,6 +1,8 @@
 {
     "env":{
         "MONGODB_ATLAS_URL": "mongodb+srv://pwr:1QNJgHwqYH36CDs4@cluster0.0uihy.mongodb.net/todolist-mean?retryWrites=true&w=majority",
-        "JWT_KEY": "your_strong_salt_secret"
+        "JWT_KEY": "your_strong_salt_secret",
+        "euser": "arean.oclo@gmail.com",
+        "epass": "Redhat@12345p"
     }
 }

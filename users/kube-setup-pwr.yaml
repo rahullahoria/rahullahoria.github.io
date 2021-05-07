@@ -23,6 +23,10 @@ spec:
           value: "mongodb://172.16.122.203/users-prod"
         - name: MONGODB_ATLAS_URL
           value: "mongodb+srv://pwr:1QNJgHwqYH36CDs4@cluster0.0uihy.mongodb.net/todolist-mean?retryWrites=true&w=majority"
+        - name: euser
+          value: "arean.oclo@gmail.com"
+        - name: epass
+          value: "Redhat@12345p"
         # - name: JWT_BASE_URL
         #   value: "https://qa.pwrigniter.com/jwt/"
         ports:
