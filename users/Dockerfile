@@ -1,7 +1,5 @@
-#FROM node:12.18.1
-
-#for production
 FROM node:13-alpine 
+#RUN npm install -g yarn
 
 WORKDIR /app
 
