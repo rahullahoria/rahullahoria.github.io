@@ -1,16 +1,14 @@
-FROM node:6.11
+FROM node:13-alpine 
+#RUN npm install -g yarn
 
-# Create app directory
-RUN mkdir -p /usr/src/chat-room
-WORKDIR /usr/src/chat-room
+WORKDIR /app
 
-# Install app dependencies
-COPY package.json /usr/src/chat-room/
-RUN npm install
+COPY package.json package-lock.json ./
 
-# Bundle app source
-COPY . /usr/src/chat-room
+RUN npm install --production
+
+COPY . .
 
 EXPOSE 3000
-USER nobody:nogroup
-CMD [ "npm", "start" ]
+
+CMD node ./server/server.js 
