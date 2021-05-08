@@ -17,15 +17,15 @@ spec:
     spec:
       containers:
       - name: users
-        image: mogiio/pwr-users:v1.05
+        image: mogiio/pwr-users:v1.06
         env:
         - name: MONGO_DB_URL
           value: "mongodb://172.16.122.203/users-prod"
         - name: MONGODB_ATLAS_URL
           value: "mongodb+srv://pwr:1QNJgHwqYH36CDs4@cluster0.0uihy.mongodb.net/todolist-mean?retryWrites=true&w=majority"
-        - name: euser
+        - name: EUSER
           value: "arean.oclo@gmail.com"
-        - name: epass
+        - name: EPASS
           value: "Redhat@12345p"
         # - name: JWT_BASE_URL
         #   value: "https://qa.pwrigniter.com/jwt/"
