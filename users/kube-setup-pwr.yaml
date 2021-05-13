@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: users
-        image: mogiio/pwr-users:v1.08
+        image: mogiio/pwr-users:v1.09
         env:
         - name: MONGO_DB_URL
           value: "mongodb://172.16.122.203/users-prod"
