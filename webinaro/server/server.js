@@ -39,31 +39,37 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
     // event listener: join
     socket.on('join', async (params, callback) => {
-        if (!isRealString(params.u) || !isRealString(params.w)) {
+        try{
+            if (!isRealString(params.u) || !isRealString(params.w)) {
+                return callback('Sorry! Invalid webinar');
+            }
+    
+            let userCheck = await UserWebinar.findOne({ userId: ObjectId(params.u) , webinarId:  ObjectId(params.w) });
+            if(!userCheck){
+                return callback('Sorry! Invalid webinar or You are not invited');
+            }
+    
+            let userObj = await UserDB.findOne({_id: ObjectId(params.u)});
+            let webinarObj = await Webinar.findOne({_id:  ObjectId(params.w) });
+            let flowObj = await Flow.findOne({_id: webinarObj.flowId});
+    
+            socket.join(params.w); // user join the specific room
+            users.removeUser(socket.id); // remove user from any other potential rooms
+            users.addUser(socket.id, userObj.name, params.w, params.u); // add user to room user list
+    
+            io.to(params.w).emit('updateUserList', users.getUserList(params.w));
+            
+            socket.emit('webinarInfo', {webinarObj:webinarObj,flowObj:flowObj, upcomingWebinars: await getNext3Webinar()}); //server emit greeting message
+            socket.emit('newMessage', generateMessage('Admin', userObj.name + ', Welcome to webinar!')); //server emit greeting message
+            
+            socket.broadcast.to(params.w).emit('newMessage', generateMessage('Admin', `${ userObj.name } has joined.`)); // server broadcast message inside of the room
+    
+            callback();
+        }
+        catch(e){
             return callback('Sorry! Invalid webinar');
         }
-
-        let userCheck = await UserWebinar.findOne({ userId: ObjectId(params.u) , webinarId:  ObjectId(params.w) });
-        if(!userCheck){
-            return callback('Sorry! Invalid webinar or You are not invited');
-        }
-
-        let userObj = await UserDB.findOne({_id: ObjectId(params.u)});
-        let webinarObj = await Webinar.findOne({_id:  ObjectId(params.w) });
-        let flowObj = await Flow.findOne({_id: webinarObj.flowId});
-
-        socket.join(params.w); // user join the specific room
-        users.removeUser(socket.id); // remove user from any other potential rooms
-        users.addUser(socket.id, userObj.name, params.w, params.u); // add user to room user list
-
-        io.to(params.w).emit('updateUserList', users.getUserList(params.w));
         
-        socket.emit('webinarInfo', {webinarObj:webinarObj,flowObj:flowObj, upcomingWebinars: await getNext3Webinar()}); //server emit greeting message
-        socket.emit('newMessage', generateMessage('Admin', userObj.name + ', Welcome to webinar!')); //server emit greeting message
-        
-        socket.broadcast.to(params.w).emit('newMessage', generateMessage('Admin', `${ userObj.name } has joined.`)); // server broadcast message inside of the room
-
-        callback();
     });
 
     // event listener: createMessage

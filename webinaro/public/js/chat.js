@@ -29,6 +29,8 @@ socket.on("connect", function () {
       console.log(err);
       //alert(err);
       //window.location.href = "/"; // redirect user back to root page
+      window.location.href = "https://pwrigniter.com/?ref=webinarPage#register";
+      //window.open("https://pwrigniter.com/#register?ref=webinarPage",'_blank');
     } else {
       console.log("No error!");
     }
@@ -97,17 +99,19 @@ function setupWebinar(message) {
   let webinarTime = new Date(webInfo.webinarObj.startTime);
   let timeRemaining = webinarTime - new Date();
 
-  console.log(timeRemaining,"timeRemaining")
+  console.log(timeRemaining,"100 timeRemaining");
   var endTime = new Date(webinarTime.getTime() + webInfo.webinarObj.duration*60000);
 
   if(endTime < new Date() ){
     console.log("webinar is over");
     jQuery("#timer").hide();
     jQuery("#webinar-over").show();
-    renderUpcomingWebinars(webInfo.upcomingWebinars)
+    renderUpcomingWebinars(webInfo.upcomingWebinars);
   }
   else{
+    
     if (timeRemaining > 0) {
+      console.log(timeRemaining,"112 timeRemaining");
       startTimer(webinarTime.getTime(), "time");
     } else {
       startWebinar();
@@ -119,15 +123,15 @@ function setupWebinar(message) {
 
 function renderUpcomingWebinars(upcomingWebinars){
   jQuery("#upcoming-webinars").innerHTML = "";
-  const seoul = new Date();
+  //const seoul = new Date();
 
   var template = jQuery("#upcoming-webinar-template").html();
   for(let i=0;i<upcomingWebinars.length;i++){
     
     var now = new Date(upcomingWebinars[i].startTime);
 
-    now = now.getTime() - seoul.getTimezoneOffset() * 60000;
-    now = new Date(now);
+    // now = now.getTime() - seoul.getTimezoneOffset() * 60000;
+    // now = new Date(now);
     
     var html = Mustache.render(template, {
       wId: upcomingWebinars[i]._id,
@@ -239,10 +243,10 @@ function startTimer(countDownDate, timerId) {
   console.log("duration, timerId", countDownDate, timerId);
   var x = setInterval(function () {
     // Get today's date and time
-    const seoul = new Date();
+    //const seoul = new Date();
     var now = new Date().getTime();
 
-    now = now - seoul.getTimezoneOffset() * 60000;
+    //now = now - seoul.getTimezoneOffset() * 60000;
 
     // Find the distance between now and the count down date
     var distance = countDownDate - now;
