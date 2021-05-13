@@ -1160,11 +1160,11 @@
                         </div>
                       </div>
 
-                      <div class="row form-group">
+                      <div class="row form-group" id="webinarList">
                         <div class="col-md-12">
                           <label>Which webinar you want to join?</label>
                         </div>
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -1180,9 +1180,9 @@
                               Default radio
                             </label>
                           </div>
-                        </div>
+                        </div> -->
 
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -1197,7 +1197,7 @@
                               Default checked radio
                             </label>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
 
                       <div class="row form-group">
@@ -1443,13 +1443,14 @@
           // Work with JSON resp here
           console.log(resp);
           try {
+            const seoul = new Date();
             for (let i = 0; i < resp.data.length; i++) {
               let webId = resp.data[i]._id;
 
               var now = new Date(resp.data[i].startTime);
 
-              now = now.getTime() - seoul.getTimezoneOffset() * 60000;
-              now = new Date(now);
+              // now = now.getTime() - seoul.getTimezoneOffset() * 60000;
+              // now = new Date(now);
               let date = now.toLocaleTimeString() + " , " + now.toDateString();
               webinarMap[webId] = date;
 
