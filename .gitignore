@@ -1,0 +1,5 @@
+users/node_modules
+*/node_modules
+webinaro/node_modules
+webinaro/kube-setup-pwr.yaml
+webinaro/server/lib/sendEmail.js
