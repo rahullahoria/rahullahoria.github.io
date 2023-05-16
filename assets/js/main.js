@@ -205,4 +205,6 @@ const rzpAffordabilitySuite = new RazorpayAffordabilitySuite(widgetConfig);
 rzpAffordabilitySuite.render();
 }
 
-$('#joinBatch').modal('show');
+setTimeout(()=>{
+  $('#joinBatch').modal('show');
+},2000)
