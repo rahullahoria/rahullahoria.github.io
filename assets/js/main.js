@@ -191,3 +191,18 @@
   });
 
 })(jQuery);
+
+
+const key = "rzp_live_F1Y3EPiKiyau2c"; //Replace it with your Test Key ID generated from the Dashboard
+const amount = 5000000; //in paise
+
+window.onload = function() {
+const widgetConfig = {
+	"key": key,
+	"amount": amount,
+};
+const rzpAffordabilitySuite = new RazorpayAffordabilitySuite(widgetConfig);
+rzpAffordabilitySuite.render();
+}
+
+$('#joinBatch').modal('show');

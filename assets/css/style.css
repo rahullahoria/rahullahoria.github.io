@@ -26,6 +26,107 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
 
+/*========== Buttons ==========*/
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  padding: 12px 30px;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.btn:focus,
+button:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.btn .title {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: italic;
+  color: #fff;
+}
+
+.btn .sub-title {
+  font-size: 16px;
+  color: #fffefe;
+}
+
+.btn-red {
+  background: rgb(207, 29, 0);
+  background: -moz-linear-gradient(0deg, rgba(207, 29, 0, 1) 0%, rgba(255, 57, 24, 1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(207, 29, 0, 1) 0%, rgba(255, 57, 24, 1) 100%);
+  background: linear-gradient(0deg, rgba(207, 29, 0, 1) 0%, rgba(255, 57, 24, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#cf1d00", endColorstr="#ff3918", GradientType=1);
+}
+
+.btn-red:hover {
+  background: rgb(255, 57, 24);
+  background: -moz-linear-gradient(0deg, rgba(255, 57, 24, 1) 0%, rgba(207, 29, 0, 1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(255, 57, 24, 1) 0%, rgba(207, 29, 0, 1) 100%);
+  background: linear-gradient(0deg, rgba(255, 57, 24, 1) 0%, rgba(207, 29, 0, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#ff3918", endColorstr="#cf1d00", GradientType=1);
+}
+
+.btn-red .btn-hover-white {
+  color: #FF3918;
+  background-color: #fff;
+  border-color: #fff;
+}
+
+@media (max-width:767.98px) {
+  .btn {
+      padding: 15px;
+  }
+  .btn .title {
+      font-size: 20px;
+  }
+  .btn .sub-title {
+      font-size: 14px;
+  }
+  form .btn .title {
+      font-size: 28px;
+  }
+  form .btn .sub-title {
+      font-size: 13px;
+  }
+}
+
+@media (max-width:475px) {
+  .btn .title {
+      font-size: 20px;
+  }
+  .btn .sub-title {
+      font-size: 14px;
+  }
+}
+
+@media (max-width:359px) {
+  .btn .title {
+      font-size: 17px;
+  }
+  .btn .sub-title {
+      font-size: 12px;
+  }
+  form .btn .title {
+      font-size: 24px;
+  }
+  form .btn .sub-title {
+      font-size: 11px;
+  }
+}
+
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
